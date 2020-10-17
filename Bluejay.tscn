@@ -1,7 +1,25 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://bluejay.png" type="Texture" id=1]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Sprite
+
+
+func _ready():
+	position = randomPosition(self)
+	flip_h = randf() > 0.5
+
+func randomPosition(sprite):
+	var viewportSize = get_viewport().size
+	var spriteSize = sprite.texture.get_size() * sprite.scale / 2
+	return Vector2(
+		rand_range(spriteSize.x, viewportSize.x - spriteSize.x),
+		rand_range(spriteSize.y, viewportSize.y - spriteSize.y)
+	)
+"
 
 [node name="Bluejay" type="Sprite"]
 scale = Vector2( 4, 4 )
 texture = ExtResource( 1 )
+script = SubResource( 1 )

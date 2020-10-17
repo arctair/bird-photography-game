@@ -20,6 +20,4 @@ func _ready():
 		add_child(treeInstance)
 	for _n in range(4):
 		var birdInstance = bluejayScene.instance()
-		birdInstance.position = randomPosition(birdInstance)
-		birdInstance.flip_h = randf() > 0.5
 		add_child(birdInstance)
