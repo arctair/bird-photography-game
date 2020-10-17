@@ -10,6 +10,10 @@ func _ready():
 	position = randomPosition(self)
 	flip_h = randf() > 0.5
 
+func _process(delta):
+	if randf() < delta:
+		position = randomPosition(self)
+
 func randomPosition(sprite):
 	var viewportSize = get_viewport().size
 	var spriteSize = sprite.texture.get_size() * sprite.scale / 2
