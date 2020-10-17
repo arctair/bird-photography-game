@@ -16,14 +16,22 @@ func randomPosition(sprite):
 	)
 
 func _ready():
+	var treeInstances := []
 	for _n in range(16):
 		var treeInstance = treeScene.instance()
 		treeInstance.position = randomPosition(treeInstance)
-		treeInstance.z_index = treeInstance.position.y
+		treeInstances.append(treeInstance)
+	treeInstances.sort_custom(PositionYSorter, 'compare')
+	for treeInstance in treeInstances:
 		add_child(treeInstance)
+
 	for _n in range(4):
 		var birdInstance = bluejayScene.instance()
 		add_child(birdInstance)
+
+class PositionYSorter:
+	static func compare(s1, s2):
+		return s1.position.y < s2.position.y
 "
 
 [node name="Node2D" type="Node2D"]
