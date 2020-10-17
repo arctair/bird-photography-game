@@ -13,7 +13,6 @@ func randomPosition(sprite):
 	)
 
 func _ready():
-	randomize()
 	for n in range(16):
 		var treeInstance = treeScene.instance()
 		treeInstance.position = randomPosition(treeInstance)
