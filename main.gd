@@ -13,12 +13,12 @@ func randomPosition(sprite):
 	)
 
 func _ready():
-	for n in range(16):
+	for _n in range(16):
 		var treeInstance = treeScene.instance()
 		treeInstance.position = randomPosition(treeInstance)
 		treeInstance.z_index = treeInstance.position.y
 		add_child(treeInstance)
-	for n in range(4):
+	for _n in range(4):
 		var birdInstance = bluejayScene.instance()
 		birdInstance.position = randomPosition(birdInstance)
 		birdInstance.flip_h = randf() > 0.5
