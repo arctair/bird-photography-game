@@ -2,6 +2,7 @@ extends Node2D
 
 
 var treeScene = preload('res://Tree.tscn')
+var bluejayScene = preload('res://Bluejay.tscn')
 
 func _ready():
 	randomize()
@@ -15,3 +16,12 @@ func _ready():
 		)
 		treeInstance.z_index = treeInstance.position.y
 		add_child(treeInstance)
+	for n in range(4):
+		var birdInstance = bluejayScene.instance()
+		var birdSize = birdInstance.texture.get_size() * birdInstance.scale / 2
+		birdInstance.position = Vector2(
+			rand_range(birdSize.x, size.x - birdSize.x),
+			rand_range(birdSize.y, size.y - birdSize.y)
+		)
+		birdInstance.flip_h = randf() > 0.5
+		add_child(birdInstance)
