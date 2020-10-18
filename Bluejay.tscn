@@ -20,6 +20,7 @@ func _process(delta):
 		nextPosition = randomPosition(self)
 	else:
 		position += nextMovement
+		flip_h = nextMovement.x >= 0
 
 func randomPosition(sprite):
 	var viewportSize = get_viewport().size
