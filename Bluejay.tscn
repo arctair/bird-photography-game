@@ -6,13 +6,20 @@
 script/source = "extends Sprite
 
 
+var nextPosition : Vector2
+var speed = 300
+
 func _ready():
 	position = randomPosition(self)
+	nextPosition = position
 	flip_h = randf() > 0.5
 
 func _process(delta):
-	if randf() < delta:
-		position = randomPosition(self)
+	var nextMovement = (nextPosition - position).normalized() * delta * speed
+	if (nextPosition - position).length() <= nextMovement.length():
+		nextPosition = randomPosition(self)
+	else:
+		position += nextMovement
 
 func randomPosition(sprite):
 	var viewportSize = get_viewport().size
