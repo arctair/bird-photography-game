@@ -9,9 +9,16 @@ script/source = "extends Sprite
 var nextPosition : Vector2
 var speed := 300
 var restingDelay : float = 0
+var forest setget set_forest, get_forest
+
+func set_forest(nextForest):
+	forest = nextForest
+
+func get_forest():
+	return forest
 
 func _ready():
-	position = randomPosition(self)
+	position = forest.randomPosition(self)
 	nextPosition = position
 	flip_h = randf() > 0.5
 
@@ -22,19 +29,11 @@ func _process(delta):
 
 	var nextMovement = (nextPosition - position).normalized() * delta * speed
 	if (nextPosition - position).length() <= nextMovement.length():
-		nextPosition = randomPosition(self)
+		nextPosition = forest.randomPosition(self)
 		restingDelay = randf() * 10
 	else:
 		position += nextMovement
 		flip_h = nextMovement.x >= 0
-
-func randomPosition(sprite):
-	var viewportSize = get_viewport().size
-	var spriteSize = sprite.texture.get_size() * sprite.scale / 2
-	return Vector2(
-		rand_range(spriteSize.x, viewportSize.x - spriteSize.x),
-		rand_range(spriteSize.y, viewportSize.y - spriteSize.y)
-	)
 "
 
 [node name="Bluejay" type="Sprite"]

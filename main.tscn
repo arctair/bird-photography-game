@@ -8,10 +8,12 @@ const bluejayScene := preload('res://Bluejay.tscn')
 const forestScene := preload('res://Forest.tscn')
 
 func _ready():
-	add_child(forestScene.instance())
+	var forest := forestScene.instance()
+	add_child(forest)
 
 	for _n in range(4):
 		var birdInstance = bluejayScene.instance()
+		birdInstance.forest = forest
 		add_child(birdInstance)
 "
 
