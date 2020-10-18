@@ -4,34 +4,15 @@
 script/source = "extends Node2D
 
 
-var treeScene = preload('res://Tree.tscn')
-var bluejayScene = preload('res://Bluejay.tscn')
-
-func randomPosition(sprite):
-	var viewportSize = get_viewport().size
-	var spriteSize = sprite.texture.get_size() * sprite.scale / 2
-	return Vector2(
-		rand_range(spriteSize.x, viewportSize.x - spriteSize.x),
-		rand_range(spriteSize.y, viewportSize.y - spriteSize.y)
-	)
+const bluejayScene := preload('res://Bluejay.tscn')
+const forestScene := preload('res://Forest.tscn')
 
 func _ready():
-	var treeInstances := []
-	for _n in range(16):
-		var treeInstance = treeScene.instance()
-		treeInstance.position = randomPosition(treeInstance)
-		treeInstances.append(treeInstance)
-	treeInstances.sort_custom(PositionYSorter, 'compare')
-	for treeInstance in treeInstances:
-		add_child(treeInstance)
+	add_child(forestScene.instance())
 
 	for _n in range(4):
 		var birdInstance = bluejayScene.instance()
 		add_child(birdInstance)
-
-class PositionYSorter:
-	static func compare(s1, s2):
-		return s1.position.y < s2.position.y
 "
 
 [node name="Node2D" type="Node2D"]
