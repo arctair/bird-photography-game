@@ -21,6 +21,9 @@ func randomPosition(sprite):
 		rand_range(spriteSize.y, viewportSize.y - spriteSize.y)
 	)
 
+func randomTreePosition(sprite):
+	return trees[randi() % trees.size()].position
+
 class PositionYSorter:
 	static func compareByPositionY(s1, s2):
 		return s1.position.y < s2.position.y

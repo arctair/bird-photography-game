@@ -18,7 +18,7 @@ func get_forest():
 	return forest
 
 func _ready():
-	position = forest.randomPosition(self)
+	position = forest.randomTreePosition(self)
 	nextPosition = position
 	flip_h = randf() > 0.5
 
@@ -29,7 +29,7 @@ func _process(delta):
 
 	var nextMovement = (nextPosition - position).normalized() * delta * speed
 	if (nextPosition - position).length() <= nextMovement.length():
-		nextPosition = forest.randomPosition(self)
+		nextPosition = forest.randomTreePosition(self)
 		restingDelay = randf() * 10
 	else:
 		position += nextMovement
