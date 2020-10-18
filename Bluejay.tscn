@@ -7,7 +7,8 @@ script/source = "extends Sprite
 
 
 var nextPosition : Vector2
-var speed = 300
+var speed := 300
+var restingDelay : float = 0
 
 func _ready():
 	position = randomPosition(self)
@@ -15,9 +16,14 @@ func _ready():
 	flip_h = randf() > 0.5
 
 func _process(delta):
+	if restingDelay > 0:
+		restingDelay -= delta
+		return
+
 	var nextMovement = (nextPosition - position).normalized() * delta * speed
 	if (nextPosition - position).length() <= nextMovement.length():
 		nextPosition = randomPosition(self)
+		restingDelay = randf() * 10
 	else:
 		position += nextMovement
 		flip_h = nextMovement.x >= 0
